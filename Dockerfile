@@ -58,8 +58,16 @@ RUN make install
 
 # Install python libraries
 RUN pip3 install matplotlib 
-RUN pip3 install ipython Biopython sklearn tensorflow==1.12 networkx open3d==0.8.0.0 dask==1.2.2 packaging
+RUN pip3 install ipython Biopython scikit-learn tensorflow==1.12 networkx open3d==0.8.0.0 dask==1.2.2 packaging
 #RUN pip install StrBioInfo 
+
+# Install conda
+# Install miniconda
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
+    /bin/bash ~/miniconda.sh -b -p /opt/conda
+
+# Install MSMS from conda
+RUN /opt/conda/bin/conda install -c bioconda msms=2.6.1
 
 # Clone masif
 WORKDIR /
