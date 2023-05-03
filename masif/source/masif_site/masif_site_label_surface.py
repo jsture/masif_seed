@@ -48,15 +48,15 @@ else:
 for ppi_pair_id in ppi_pair_ids:
     fields = ppi_pair_id.split("_")
     pdbid = fields[0]
-    if len(fields) == 2 or fields[2] == '':
+    if len(fields) == 2 or fields[2] == "":
         chains = [ppi_pair_id.split("_")[1]]
     else:
         chains = [ppi_pair_id.split("_")[1], ppi_pair_id.split("_")[2]]
 
     if len(chains) == 1:
-        pids = ['p1']
-    else: 
-        pids = ['p1', 'p2']
+        pids = ["p1"]
+    else:
+        pids = ["p1", "p2"]
 
     for ix, pid in enumerate(pids):
         ply_file = masif_opts["ply_file_template"].format(pdbid, chains[ix])
@@ -76,32 +76,32 @@ for ppi_pair_id in ppi_pair_ids:
             continue
         try:
             scores = np.load(
-                params["out_pred_dir"] + "/pred_" + pdbid + "_" + chains[ix] + ".npy"
+                params["out_pred_dir"] + "pred_" + pdbid + "_" + chains[ix] + ".npy"
             )
         except:
             print(
                 "File does not exist: {}".format(
-                    params["out_pred_dir"]
-                    + "/pred_"
-                    + pdbid
-                    + "_"
-                    + chains[ix]
-                    + ".npy"
+                    params["out_pred_dir"] + "pred_" + pdbid + "_" + chains[ix] + ".npy"
                 )
             )
             continue
 
-
         mymesh = p1
 
-        ground_truth = mymesh.get_attribute('vertex_iface')
-        # Compute ROC AUC for this protein. 
+        ground_truth = mymesh.get_attribute("vertex_iface")
+        # Compute ROC AUC for this protein.
         try:
             roc_auc = roc_auc_score(ground_truth, scores[0])
             all_roc_auc_scores.append(roc_auc)
-            print("ROC AUC score for protein {} : {:.2f} ".format(pdbid+'_'+chains[ix], roc_auc))
-        except: 
-            print("No ROC AUC computed for protein (possibly, no ground truth defined in input)") 
+            print(
+                "ROC AUC score for protein {} : {:.2f} ".format(
+                    pdbid + "_" + chains[ix], roc_auc
+                )
+            )
+        except:
+            print(
+                "No ROC AUC computed for protein (possibly, no ground truth defined in input)"
+            )
 
         mymesh.remove_attribute("vertex_iface")
         mymesh.add_attribute("iface")
@@ -121,7 +121,9 @@ for ppi_pair_id in ppi_pair_ids:
             use_float=True,
             ascii=True
         )
-        print("Successfully saved file " + params["out_surf_dir"] + pdb_chain_id + ".ply")
+        print(
+            "Successfully saved file " + params["out_surf_dir"] + pdb_chain_id + ".ply"
+        )
 
 med_roc = np.median(all_roc_auc_scores)
 
