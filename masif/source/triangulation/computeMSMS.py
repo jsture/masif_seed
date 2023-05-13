@@ -50,7 +50,7 @@ def computeMSMS(pdb_file, protonate=True):
         except Exception as e:
             print(e)
             fudge += 0.01
-            if probe_radius > 2.0 or probe_radius < 1.3:
+            if probe_radius > 5.0 or probe_radius < 1.3:
                 print("Error: MSMS failed to run.")
                 sys.exit(1)
             continue
