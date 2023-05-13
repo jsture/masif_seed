@@ -45,7 +45,7 @@ def computeMSMS(pdb_file, protonate=True):
                 "-af",
                 file_base,
             ]
-            p = run(args, capture_output = True, text = True, check=True)
+            p = run(args, text = True, check=True, capture_output=True)
             print(p.stdout)
             print(p.stderr)
             vert_exists = os.path.exists(file_base + ".vert")
