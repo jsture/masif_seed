@@ -23,7 +23,7 @@ def computeMSMS(pdb_file, protonate=True):
         print("Error - pdb2xyzrn is deprecated.")
         sys.exit(1)
     # Now run MSMS on xyzrn file
-    probe_start = 1.5 # 1.55
+    probe_start = 1.505 # 1.55
     vert_exists = False
     fudge = 0
     while not vert_exists:
@@ -45,7 +45,7 @@ def computeMSMS(pdb_file, protonate=True):
                 "-af",
                 file_base,
             ]
-            run(args, stdout=PIPE, stderr=PIPE, check=True, text = True)
+            run(args, stdout=PIPE, stderr=PIPE, check=True)
             vert_exists = os.path.exists(file_base + ".vert")
         except Exception as e:
             print(e)
