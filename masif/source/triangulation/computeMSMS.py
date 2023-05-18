@@ -23,7 +23,7 @@ def computeMSMS(pdb_file, protonate=True):
         print("Error - pdb2xyzrn is deprecated.")
         sys.exit(1)
     # Now run MSMS on xyzrn file
-    probe_start = 1
+    probe_start = 1.5
     vert_exists = False
     fudge = 0
     while not vert_exists:
@@ -50,9 +50,6 @@ def computeMSMS(pdb_file, protonate=True):
         except Exception as e:
             print(e)
             fudge += 0.05
-            if probe_radius > 5.0 or probe_radius < 1.3:
-                print("Error: MSMS failed to run.")
-                sys.exit(1)
             continue
 
     vertices, faces, normals, names = read_msms(file_base)
