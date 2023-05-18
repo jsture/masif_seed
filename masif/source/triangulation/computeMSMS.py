@@ -64,8 +64,8 @@ def computeMSMS(pdb_file, protonate=True):
         areas[fields[3]] = fields[1]
 
     # Remove temporary files.
-    os.remove(file_base + ".area")
-    os.remove(file_base + ".xyzrn")
-    os.remove(file_base + ".vert")
-    os.remove(file_base + ".face")
+#     os.remove(file_base + ".area")
+#     os.remove(file_base + ".xyzrn")
+#     os.remove(file_base + ".vert")
+#     os.remove(file_base + ".face")
     return vertices, faces, normals, names, areas
