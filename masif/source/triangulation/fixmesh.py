@@ -34,17 +34,18 @@ def fix_mesh(mesh, resolution, detail="normal"):
     mesh, __ = pymesh.split_long_edges(mesh, target_len);
     num_vertices = mesh.num_vertices;
     while True:
+        foo = [77105, 29190, 33347, 43413]
+        mesh, info = pymesh.collapse_short_edges(mesh, 1e-6);
         try:
-            foo = [77105, 29190, 33347, 43413]
-            mesh, info = pymesh.collapse_short_edges(mesh, 1e-6);
             print(info)
             print(mesh.vertices[foo])
-            mesh, info = pymesh.collapse_short_edges(mesh, target_len,
-                    preserve_feature=True);
-            print(info)
-            mesh, info = pymesh.remove_obtuse_triangles(mesh, 150.0, 100);
-            print(info)
         except:
+            print("mesh printing error")
+        mesh, info = pymesh.collapse_short_edges(mesh, target_len,
+                preserve_feature=True);
+        print(info)
+        mesh, info = pymesh.remove_obtuse_triangles(mesh, 150.0, 100);
+        print(info)
                 
         if mesh.num_vertices == num_vertices:
             break;
