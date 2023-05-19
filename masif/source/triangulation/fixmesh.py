@@ -22,11 +22,10 @@ def fix_mesh(mesh, resolution, detail="normal"):
     #print("Target resolution: {} mm".format(target_len));
     # PGC 2017: Remove duplicated vertices first
     mesh, _ = pymesh.remove_duplicated_vertices(mesh, 0.001)
-
-    #Vertex 77105 has valance 4
-    # Warning: Complex edge loop detected!  Vertex 29190 has valance 4
-    # Warning: Complex edge loop detected!  Vertex 33347 has valance 4
-    # Warning: Complex edge loop detected!  Vertex 43413 has valance 4
+# 120181 has valance 4
+# Warning: Complex edge loop detected!  Vertex 29429 has valance 4
+# Warning: Complex edge loop detected!  Vertex 25799 has valance 4
+# Warning: Complex edge loop detected!  Vertex 30796 has valance 4
 
     count = 0;
     print("Removing degenerated triangles")
@@ -34,7 +33,7 @@ def fix_mesh(mesh, resolution, detail="normal"):
     mesh, __ = pymesh.split_long_edges(mesh, target_len);
     num_vertices = mesh.num_vertices;
     while True:
-        foo = [77105, 29190, 33347, 43413]
+        foo = [120181, 29429, 25799, 30796]
         mesh, info = pymesh.collapse_short_edges(mesh, 1e-6);
         try:
             print(info)
