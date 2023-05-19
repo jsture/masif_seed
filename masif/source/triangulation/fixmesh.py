@@ -18,7 +18,7 @@ def fix_mesh(mesh, resolution, detail="normal"):
     elif detail == "low":
         target_len = diag_len * 1e-2;
     
-    target_len = resolution
+    target_len = 1.2 # resolution
     #print("Target resolution: {} mm".format(target_len));
     # PGC 2017: Remove duplicated vertices first
     mesh, _ = pymesh.remove_duplicated_vertices(mesh, 0.001)
@@ -39,7 +39,10 @@ def fix_mesh(mesh, resolution, detail="normal"):
             print(info)
             print(mesh.vertices[foo])
         except:
-            print("mesh printing error")
+            try:
+              print(mesh.vertices[foo[1:]])
+            except:
+                print("balls")
         mesh, info = pymesh.collapse_short_edges(mesh, target_len,
                 preserve_feature=True);
         print(info)
